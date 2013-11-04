@@ -9,6 +9,8 @@ import socket
 
 class Logger:
  LOG_FILENAME = '/FIXME/logs/python.log'
+ BABIES_VIDEOS_DIR = '/mount/babies_videos_dir'
+ PELIS = '/mount/pelis'
  scriptname=None
  logger=None
 
@@ -86,7 +88,7 @@ class Main:
    result='00:00'
   return result
 
- def add_action(self,command,path='/my/videos/hollywood'):
+ def add_action(self,command,path=self.PELIS):
   l=self.logger
   l.debug('add_action path='+path)
   dirtoshow=os.listdir(path)
@@ -178,7 +180,7 @@ class Main:
   v=self.vlc
   v.sendcommand("clear")
   v.sendcommand("random")
-  v.sendcommand("add /my/videos/kids/BabyEinstein")
+  v.sendcommand("add "+self.BABIES_VIDEOS_DIR)
   #TODO: write pause
   v.sendcommand("f")
 
@@ -251,7 +253,7 @@ class Main:
   print '<!DOCTYPE HTML>\n\
   <html>\n\
   <head>\n\
-   <link rel="stylesheet" type="text/css" href="/css/my.css" />\n\
+   <link rel="stylesheet" type="text/css" href="/css/vlc.css" />\n\
    <meta name="HandheldFriendly" content="true" />\n\
    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no" />\n\
    <title>vlc</title>\n\
