@@ -1,10 +1,11 @@
-pipeline {
-    agent { docker 'python:3.5.1' }
-    stages {
-        stage('build') {
-            steps {
-                sh 'python --version'
-            }
+node {
+    stage('Deploy') {
+        retry(3) {
+            sh './flakey-deploy.sh'
+        }
+
+        timeout(time: 3, unit: 'MINUTES') {
+            sh './health-check.sh'
         }
     }
 }
